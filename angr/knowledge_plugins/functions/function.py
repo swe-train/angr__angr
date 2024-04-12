@@ -1642,7 +1642,7 @@ class Function(Serializable):
         else:
             raise TypeError("calling_convention has to be one of: [SimCC, type(SimCC), None]")
 
-    def functions_called(self) -> Set["Function"]:
+    def functions_reachable(self) -> Set["Function"]:
         """
         :return: The set of all functions that can be reached from the function represented by self.
         """
