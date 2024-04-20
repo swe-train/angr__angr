@@ -212,10 +212,6 @@ class Clinic(Analysis):
         # initialize the AIL conversion manager
         self._ail_manager = ailment.Manager(arch=self.project.arch)
 
-        # Track stack pointers
-        self._update_progress(15.0, text="Tracking stack pointers")
-        spt = self._track_stack_pointers()
-
         # Convert VEX blocks to AIL blocks and then simplify them
 
         self._update_progress(20.0, text="Converting VEX to AIL")
@@ -263,6 +259,10 @@ class Clinic(Analysis):
 
         # cached block-level reaching definition analysis results and propagator results
         block_simplification_cache: Optional[Dict[ailment.Block, NamedTuple]] = {}
+
+        # Track stack pointers
+        self._update_progress(15.0, text="Tracking stack pointers")
+        spt = self._track_stack_pointers()
 
         # Simplify blocks
         # we never remove dead memory definitions before making callsites. otherwise stack arguments may go missing
